@@ -18,7 +18,7 @@ docker compose build
 docker compose up -d
 ```
 
-### Access the frontend
+### Access frontend
 
 ```
 http://localhost:3000
