@@ -15,7 +15,7 @@ docker compose build
 ## Run application
 
 ```
-docker compose up -d --force-recreate
+docker compose up -d
 ```
 
 ## Clean up
