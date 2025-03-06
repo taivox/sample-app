@@ -1,10 +1,11 @@
 package api
 
 import (
-	"github.com/apex/log"
-	"github.com/gofiber/fiber/v2"
 	"backend/packages/config"
 	"backend/packages/db"
+
+	"github.com/apex/log"
+	"github.com/gofiber/fiber/v2"
 )
 
 var server *fiber.App
