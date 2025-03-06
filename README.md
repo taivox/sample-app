@@ -4,21 +4,27 @@ This is a sample app with React frontend, Go backend and Postgres database.
 
 It uses the [go fiber](https://github.com/gofiber/fiber) framework
 
-# Usage
+## Usage
 
-## Build images
+### Build images
 
 ```
 docker compose build
 ```
 
-## Run application
+### Run application
 
 ```
 docker compose up -d
 ```
 
-## Clean up
+### Access the frontend
+
+```
+http://localhost:3000
+```
+
+### Clean up
 
 ```
 docker compose down -v
