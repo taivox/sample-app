@@ -2,7 +2,10 @@
 
 This is a sample app with React frontend, Go backend and Postgres database.
 
-It uses the [go fiber](https://github.com/gofiber/fiber) framework
+It allows users to register, login and logout.
+Accounts are stored in Postgres database.
+
+[Go fiber](https://github.com/gofiber/fiber) framework is used for backend.
 
 ## Usage
 
