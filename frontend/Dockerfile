@@ -1,10 +1,9 @@
-FROM node:23-alpine3.21 AS build
-RUN apk update && apk add --no-cache bash make
+FROM node:22-alpine3.21 AS build
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --production
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN yarn build
+RUN npm run build
 
 FROM nginx:1.27-alpine3.21
 COPY --from=build /app/build /usr/share/nginx/html

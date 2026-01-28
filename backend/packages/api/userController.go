@@ -37,7 +37,9 @@ func CreateUser(c *fiber.Ctx, dbConn *sql.DB) error {
 		return c.Status(400).JSON(&fiber.Map{"success": false, "errors": []string{"email already exists"}})
 	}
 
-	user.HashPassword()
+	if err := user.HashPassword(); err != nil {
+		return err
+	}
 	_, err := dbConn.Query(db.CreateUserQuery, user.Name, user.Password, user.Email)
 	if err != nil {
 		return err

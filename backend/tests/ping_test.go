@@ -30,7 +30,7 @@ func TestPingTest(t *testing.T) {
 	go api.StartServer()
 	time.Sleep(1 * time.Second) // wait for server to start
 
-	serverPort, _ := config.Config[config.SERVER_PORT]
+	serverPort := config.Config[config.SERVER_PORT]
 
 	suite.Run(t, &pingTestSuite{
 		port: serverPort,
@@ -44,7 +44,7 @@ func (s *pingTestSuite) AfterTest(su, t string) {
 func (s *pingTestSuite) TestPing() {
 	response, err := http.Get(fmt.Sprintf("http://localhost%s/api/ping", s.port))
 	s.NoError(err)
-	defer response.Body.Close()
+	defer func() { _ = response.Body.Close() }()
 
 	s.NoError(err)
 	s.Equal(http.StatusOK, response.StatusCode)

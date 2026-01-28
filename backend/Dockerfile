@@ -1,4 +1,4 @@
-FROM golang:1.24-alpine3.21 AS build
+FROM golang:1.25.6-alpine3.21 AS build
 RUN apk add --no-cache make
 WORKDIR /app
 COPY go.mod go.sum ./
@@ -6,8 +6,8 @@ RUN go mod download
 COPY . .
 RUN make build
 
-
 FROM alpine:3.21
+RUN apk add --no-cache ca-certificates
 WORKDIR /app
 COPY --from=build /app/cmd/main /cmd/main
 COPY --from=build /app/.env /.env

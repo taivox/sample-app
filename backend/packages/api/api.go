@@ -15,7 +15,11 @@ func StartServer() {
 	if err != nil {
 		log.WithField("reason", err.Error()).Fatal("Db connection error occurred")
 	}
-	defer conn.Close()
+	defer func() {
+		if err := conn.Close(); err != nil {
+			log.WithField("reason", err.Error()).Error("Failed to close db connection")
+		}
+	}()
 
 	runMigration := config.Config[config.RUN_MIGRATION]
 	dbName := config.Config[config.POSTGRES_DB]

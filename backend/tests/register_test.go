@@ -41,7 +41,7 @@ func TestRegisterTest(t *testing.T) {
 		log.WithField("reason", err.Error()).Fatal("Db connection error occurred")
 	}
 
-	serverPort, _ := config.Config[config.SERVER_PORT]
+	serverPort := config.Config[config.SERVER_PORT]
 
 	suite.Run(t, &registerTestSuite{
 		port: serverPort,
@@ -50,7 +50,7 @@ func TestRegisterTest(t *testing.T) {
 }
 
 func (s *registerTestSuite) AfterTest(su, t string) {
-	defer s.db.Close()
+	defer func() { _ = s.db.Close() }()
 	_, err := s.db.Query(db.DeleteUser, "test@test.com")
 	if err != nil {
 		log.WithField("reason", err.Error()).Fatal("Failed executing DELETE USER QUERY")
@@ -65,7 +65,7 @@ func (s *registerTestSuite) TestRegister() {
 	response, err := http.Post(fmt.Sprintf("http://localhost%s/api/register", s.port),
 		"application/json", bytes.NewBuffer(jsonData))
 	s.NoError(err)
-	defer response.Body.Close()
+	defer func() { _ = response.Body.Close() }()
 
 	s.Equal(http.StatusOK, response.StatusCode)
 	body, _ := io.ReadAll(response.Body)
