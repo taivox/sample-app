@@ -1,6 +1,6 @@
 # sample-app
 
-React + Go Fiber + PostgreSQL auth app.
+React + Go Fiber + PostgreSQL auth app for learning and practicing.
 
 ## Structure
 - `backend/` - Go Fiber API (port 8080)
@@ -8,9 +8,15 @@ React + Go Fiber + PostgreSQL auth app.
 
 ## Run locally
 ```
-docker-compose up -d db
+docker compose up -d db
 cd backend && go run cmd/main.go
 cd frontend && npm run dev
+```
+
+## Test
+```
+cd backend && go test ./...
+cd frontend && npm run test:run
 ```
 
 ## Token Usage
