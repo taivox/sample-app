@@ -1,44 +1,38 @@
-# Sample app
+# Sample App
 
-This is a sample app with React frontend, Go backend and Postgres database.
+A full-stack authentication app with React, Go, and PostgreSQL.
 
-It allows users to register, login and logout.
-Accounts are stored in Postgres database.
+## Tech Stack
 
-[Go fiber](https://github.com/gofiber/fiber) framework is used for backend.
+| Layer    | Technology                   |
+| -------- | ---------------------------- |
+| Frontend | React 19, Vite, React Router |
+| Backend  | Go 1.25, Fiber               |
+| Database | PostgreSQL                   |
 
-## Usage
+## Quick Start
 
-### Build images
+### Run with Docker
 
-```
+```bash
 docker compose build
-```
-
-### Run application
-
-```
 docker compose up -d
 ```
 
-### Access frontend
+Access the app at **http://localhost:3000**
 
-```
-http://localhost:3000
-```
+### Clean Up
 
-### Clean up
-
-```
+```bash
 docker compose down -v
 ```
 
-## Endpoints
+## API Endpoints
 
-| endpoint      | method | body                                           | description       |
-| ------------- | ------ | ---------------------------------------------- | ----------------- |
-| /api/ping     | GET    |                                                | ping server       |
-| /api/session  | GET    |                                                | get user session  |
-| /api/login    | POST   | { email String, password String }              | login user        |
-| /api/register | POST   | { email String, password String, name String } | register new user |
-|               |        |                                                |                   |
+| Endpoint        | Method | Body                        | Description         |
+| --------------- | ------ | --------------------------- | ------------------- |
+| `/api/ping`     | GET    | -                           | Health check        |
+| `/api/register` | POST   | `{ name, email, password }` | Register user       |
+| `/api/login`    | POST   | `{ email, password }`       | Login user          |
+| `/api/session`  | GET    | -                           | Get current session |
+| `/api/logout`   | GET    | -                           | Logout user         |
