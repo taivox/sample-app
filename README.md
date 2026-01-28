@@ -1,6 +1,6 @@
 # Sample App
 
-A full-stack authentication app with React, Go, and PostgreSQL.
+A sample full-stack authentication app built for learning and practicing.
 
 ## Tech Stack
 
