@@ -1,7 +1,7 @@
 # backend
 
 ## Verify
-`gofumpt -w . && golangci-lint run && go build .`
+`gofumpt -w . && golangci-lint run && go build . && go test ./...`
 
 ## Structure
 - `cmd/main.go` - entry point

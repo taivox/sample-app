@@ -7,19 +7,28 @@ services:
       POSTGRES_PASSWORD: postgres_test
       POSTGRES_DB: postgres_test
     ports:
-      - '5432:5432'
+      - "5433:5432"
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres_test']
+      test: ["CMD", "pg_isready", "-U", "postgres_test"]
       interval: 1s
       retries: 10
       timeout: 1s
 
   run-tests:
-    image: golang:1.24-alpine3.21
+    image: golang:1.25.6-alpine3.23
     volumes:
       - ./:/app
-    working_dir: /app/tests
+    working_dir: /app
+    environment:
+      POSTGRES_USER: postgres_test
+      POSTGRES_PASSWORD: postgres_test
+      POSTGRES_DB: postgres_test
+      POSTGRES_SERVER_HOST: db
+      CLIENT_URL: http://localhost:3000
+      SERVER_PORT: ":8081"
+      JWT_KEY: secretive
+      RUN_MIGRATION: "true"
     depends_on:
       db:
         condition: service_healthy
-    command: go test -v
+    command: go test ./... -v
